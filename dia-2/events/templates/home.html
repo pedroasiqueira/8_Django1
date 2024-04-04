@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+ {% block title %}
+   Primeiro Template
+ {% endblock %}
+
+ {% block content %}
+     <h1 class="absolute top-0 w-[100%] h-10 bg-[#034824] text-white text-3xl text-bold text-center"> Eventos {{ company }} </h1>
+    {% for event in events %}
+        <a class="md:w-1/4 h-fit ml-2 mr-2 mt-11 md:mt-14 " href="{% url 'details-page' event.id %}"> 
+            <div class="flex flex-col w-[100%] bg-white rounded-3xl items-center justify-start gap-y-1 lg:gap-y-3 hover:shadow-lg">
+                {% if event.image %}
+                <img class="w-1/4 md:w-1/2" src="{% static event.image.url %}" alt="Imagem sobre o evento" height="50">
+                {% endif %}
+                <h3 class="text-zinc-600 text-lg"> {{ event.title }} </h3>
+                <p class="text-zinc-500 text-base"> {{ event.date|date:"SHORT_DATE_FORMAT" }} </p>
+                <p class="text-zinc-400 text-base"> {{ event.location }}</p>
+            </div>
+        </a>
+    {% empty %}
+        <p class="text-zinc-600 text-lg"> Não existem eventos cadastrados </p>
+    {% endfor %}
+ {% endblock %}
