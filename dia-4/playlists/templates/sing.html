@@ -1,0 +1,15 @@
+<!-- playlists/templates/music.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Formulário para Novo Cantor
+{% endblock %}
+
+{% block content %}
+<form method="post" action="{% url 'singer-page' %}">
+    {% csrf_token %}
+    {{sing.as_p}}
+    <input type="submit" value="Submeter formulário">
+</form>
+{% endblock %}
